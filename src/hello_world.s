@@ -2,7 +2,6 @@ section .text
     global _start
 
 _start:
-
     mov     rdx,len
     mov     rsi,msg
     mov     rbx,1

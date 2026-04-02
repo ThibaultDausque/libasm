@@ -3,7 +3,7 @@ NAME = libasm.a
 ASMC = nasm
 ASMFLAGS = -felf64 -g
 BIN = bin
-SRCS = $(wildcard src/*.s)
+SRCS = src/ft_strlen.s
 AR = ar
 ARFLAGS = crs
 
@@ -11,12 +11,9 @@ OBJS = $(SRCS:src/%.s=$(BIN)/%.o)
 
 all: $(NAME)
 
-$(BIN):
+$(BIN)/%.o: src/%.s
 	@mkdir -p $(BIN)
-
-$(BIN)/%.o: src/%.s | $(BIN)
 	@$(ASMC) $(ASMFLAGS) $< -o $@
-	@echo "bin created"
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
