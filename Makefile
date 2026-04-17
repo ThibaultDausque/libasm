@@ -1,9 +1,10 @@
 NAME = libasm.a
 
 ASMC = nasm
-ASMFLAGS = -felf64 -g
+ASMFLAGS = -fmacho64 -g
 BIN = bin
-SRCS = src/ft_strlen.s
+SRCS = src/ft_strlen.s \
+		src/ft_strcpy.s
 AR = ar
 ARFLAGS = crs
 
