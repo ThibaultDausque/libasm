@@ -2,16 +2,32 @@ section .text
 	global	_ft_strcmp
 
 _ft_strcmp:
-	xor		rax, rax
 	xor		rcx, rcx
 
 	L1:
-		cmp		byte[rdi + rax], 0
-		cmp		byte[rsi + rcx], 0
-		je		return
-		inc		rax
+		cmp		rdi, 0
+		jz		check
+		cmp		rsi, 0
+		jz		check
+		mov		dl, BYTE [rdi + rcx]
+		cmp		BYTE [rsi + rcx], dl
+		jl		sub
+		jg		sub
 		inc		rcx
-		jmp		L1
-	
-return:
+		loop	L1
+
+check:
+	cmp		rdi, rsi
+	je		null
+	jl		sub
+	jg		sub
+
+sub:
+	movzx	rax, BYTE [rdi]
+	movzx	rdx, BYTE [rsi]
+	sub		rax, rdx
 	ret
+
+null:
+	xor		rax, rax
+	ret		
