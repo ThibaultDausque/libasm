@@ -1,23 +1,26 @@
-NAME = tests
+NAME = ft_tests
+
 CC = gcc
-CFLAGS = -arch x86_64 -Wall -Wextra -Werror -g -fsanitize=address
-INCLUDES = -Iincludes
+CFLAGS = -Wall -Wextra -Werror -g
+INCLUDES = -I includes
 BIN = bin
 SRCS = main.c \
 		ft_strlen_test.c \
-		ft_strcpy_test.c 
+		ft_strcpy_test.c \
+		ft_strcmp_test.c \
+		ft_write_test.c \
+		ft_read_test.c \
+		ft_strdup_test.c
+
 OBJS = $(SRCS:%.c=$(BIN)/%.o)
 
 LIBASM = ../libasm.a
 
 all: $(NAME)
 
-$(BIN)/%.o: %.c
+$(NAME): $(LIBASM) $(SRCS)
 	@mkdir -p $(BIN)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-$(NAME): $(OBJS) $(LIBASM)
-	@$(CC) $(CFLAGS) $(LIBASM) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS) $(LIBASM) $(INCLUDES) -o $(NAME)
 	@echo "tests compiled"
 
 clean:

@@ -1,31 +1,26 @@
 section .text
-	global	_ft_strcmp
+	global	ft_strcmp
 
-_ft_strcmp:
+ft_strcmp:
 	xor		rcx, rcx
 
 	L1:
-		cmp		rdi, 0
-		jz		check
-		cmp		rsi, 0
-		jz		check
-		mov		dl, BYTE [rdi + rcx]
-		cmp		BYTE [rsi + rcx], dl
-		jl		sub
-		jg		sub
+		mov		al, BYTE [rdi + rcx]
+		mov		dl, BYTE [rsi + rcx]
+		cmp		al, 0
+		je		null
+		cmp		al, dl
+		jg		sup
+		jl		inf
 		inc		rcx
-		loop	L1
+		jmp		L1
 
-check:
-	cmp		rdi, rsi
-	je		null
-	jl		sub
-	jg		sub
+sup:
+	mov		rax, 1
+	ret
 
-sub:
-	movzx	rax, BYTE [rdi]
-	movzx	rdx, BYTE [rsi]
-	sub		rax, rdx
+inf:
+	mov		rax, -1
 	ret
 
 null:

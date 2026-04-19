@@ -1,10 +1,14 @@
 NAME = libasm.a
 
 ASMC = nasm
-ASMFLAGS = -fmacho64 -g
+ASMFLAGS = -f elf64 -g
 BIN = bin
 SRCS = src/ft_strlen.s \
-		src/ft_strcpy.s
+		src/ft_strcpy.s \
+		src/ft_strcmp.s \
+		src/ft_write.s \
+		src/ft_read.s \
+		src/ft_strdup.s
 AR = ar
 ARFLAGS = crs
 
@@ -28,4 +32,13 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean all
+TEST_DIR = tests
+TEST = $(TEST_DIR)/ft_tests
+
+test : test_build
+	@$(TEST)
+
+test_build : $(NAME) $(TEST)
+	@make -C $(TEST_DIR) clean
+
+.PHONY: clean fclean all re test test_build

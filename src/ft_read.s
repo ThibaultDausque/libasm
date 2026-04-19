@@ -1,7 +1,7 @@
 section .text
-    global _ft_read
+    global ft_read
 
-_ft_read:
+ft_read:
     cmp     rdi, 0
     jl      err
     cmp     rsi, 0

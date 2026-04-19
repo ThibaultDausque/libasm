@@ -1,7 +1,7 @@
 section .text
-    global  _ft_write
+    global  ft_write
 
-_ft_write:
+ft_write:
     cmp     rdi, 0
     jl      err
     cmp     rsi, 32
