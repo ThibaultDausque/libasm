@@ -3,14 +3,15 @@ section .text
 
 ft_strcmp:
 	xor		rcx, rcx
+	xor 	rax, rax
 
 	L1:
 		cmp		BYTE[rdi + rcx], 0
 		je		null
 		cmp		BYTE[rsi + rcx], 0
 		je		null
-		mov		al, BYTE[rdi + rcx]
-		cmp		al, BYTE[rsi + rcx]
+		mov		al, BYTE[rsi + rcx]
+		cmp		BYTE[rdi + rcx], al
 		jne		check
 		inc		rcx
 		jmp		L1

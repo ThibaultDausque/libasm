@@ -11,30 +11,37 @@ int	main(void)
 	ft_strlen_test("do you like what you see ?");
 
 	const char	*src = "hello world!";
+	const char	*src2 = "Je t'en supplie, strcpy moi !!!";
+	const char 	*src3 = "Si tu mets faux a ce projet je te retrouve";
 	char	*dest = (char*)malloc(strlen(src) + 1);
-	if (!dest)
+	char	*dest2 = (char*)malloc(strlen(src2) + 1);
+	char	*dest3 = (char*)malloc(strlen(src3) + 1);
+	if (!dest || !dest2 || !dest3)
 		return 0;
 	// strcpy
 	printf(" ====== FT_STRCPY.S ======\n\n");
 	ft_strcpy_test(dest, src);
-	ft_strcpy_test(dest, src);
+	ft_strcpy_test(dest2, src2);
+	ft_strcpy_test(dest3, src3);
 
 	// strcmp
 	printf(" ====== FT_STRCMP.S ======\n\n");
 	ft_strcmp_test("toto", "tata");
 	ft_strcmp_test("toto", "toto");
-	ft_strcmp_test("tata", "toto");
+	ft_strcmp_test("tata", "rien a foot");
 
 	// write
 	int		w_fd = 0;
 	const char	w_buf = 't';
+	const char	*w_buf2 = "wadup bro ?";
 	// size_t		w_count = strlen(w_buf);
 	printf(" ====== FT_WRITE.S ======\n\n");
 	ft_write_test(w_fd, &w_buf, 1);
+	ft_write_test(w_fd, w_buf2, 3);
 	
 	// read
 	char	*title = "to_read.txt";
-	size_t	r_count = 1;
+	size_t	r_count = 5;
 	int		r_fd = open(title, O_RDONLY);
 	char	*buf = malloc(42);
 	if (!buf)
@@ -49,11 +56,18 @@ int	main(void)
 	buf[b] = '\0';
 	
 	// strdup
-	const char *s = "toto";
+	const char *s1 = "toto";
+	const char *s2 = "t'es vraiment un mec trop trop cool et t'es trop beau";
+	const char *s3 = "gougougaga";
 	printf(" ====== FT_STRDUP.S ======\n\n");
-	ft_strdup_test(s);
+	ft_strdup_test(s1);
+	ft_strdup_test(s2);
+	ft_strdup_test(s3);
 	
 	free(buf);
 	free(dest);
+	free(dest2);
+	free(dest3);
+	close(r_fd);
 	return 0;
 }
