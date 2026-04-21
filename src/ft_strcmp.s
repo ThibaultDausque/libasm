@@ -5,24 +5,22 @@ ft_strcmp:
 	xor		rcx, rcx
 
 	L1:
-		mov		al, BYTE [rdi + rcx]
-		mov		dl, BYTE [rsi + rcx]
-		cmp		al, 0
+		cmp		BYTE[rdi + rcx], 0
 		je		null
-		cmp		al, dl
-		jg		sup
-		jl		inf
+		cmp		BYTE[rsi + rcx], 0
+		je		null
+		mov		al, BYTE[rdi + rcx]
+		cmp		al, BYTE[rsi + rcx]
+		jne		check
 		inc		rcx
 		jmp		L1
 
-sup:
-	mov		rax, 1
-	ret
-
-inf:
-	mov		rax, -1
-	ret
+	check:
+		movzx   rax, BYTE[rdi + rcx]
+    	movzx	rdx, BYTE[rsi + rcx]
+		sub		rax, rdx
+		ret
 
 null:
 	xor		rax, rax
-	ret		
+	ret	

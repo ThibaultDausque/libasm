@@ -1,29 +1,27 @@
-extern  malloc
-extern  strlen
-
 section .text
-    global ft_strdup
+    global  ft_strdup
+    extern  malloc
+    extern  ft_strlen
+    extern  ft_strcpy
+    extern __errno_location
 
 ft_strdup:
-    xor     rcx, rcx
-
-    cmp     rdi, 0
-    je      error
-    
+    push    rdi
+    call    ft_strlen
+    inc     rax
+    mov     rdi, rax
     call    malloc wrt ..plt
-    test    rax, rax
+    cmp     rax, 0
     jz      error
-    
-    L1:
-        cmp     byte [rdi + rcx], 0
-        mov     dl, byte [rdi + rcx]
-        mov     byte [rax + rcx], dl
-        inc     rcx
-        jnz     L1
-    
-    mov     rax, 0
+    mov     rdi, rax
+    pop     rsi
+    call    ft_strcpy
     ret
 
 error:
-    xor     rax, rax
+    neg     rax
+    mov     rdi, rax
+    call    __errno_location wrt ..plt
+    mov     [rax], rdi
+    mov     rax, -1
     ret
