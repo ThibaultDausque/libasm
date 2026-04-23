@@ -2,11 +2,6 @@
 
 int	ft_strlen_test(const char *s)
 {
-	if (!s)
-	{
-		return 0;
-	}
-
 	size_t	len_asm = ft_strlen(s);
 	size_t	len_c = strlen(s);
 

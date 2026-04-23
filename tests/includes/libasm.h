@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <errno.h>
 
 size_t	    ft_strlen(const char *s);
 int		    ft_strlen_test(const char *s);
