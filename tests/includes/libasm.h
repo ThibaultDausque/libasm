@@ -8,6 +8,13 @@
 #include <fcntl.h>
 #include <errno.h>
 
+typedef struct s_list
+{
+    void    *data;
+    struct s_list *next;
+}   t_list;
+
+
 size_t	    ft_strlen(const char *s);
 int		    ft_strlen_test(const char *s);
 

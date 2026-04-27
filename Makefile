@@ -9,10 +9,18 @@ SRCS = src/ft_strlen.s \
 		src/ft_write.s \
 		src/ft_read.s \
 		src/ft_strdup.s
+
+SRCS_BONUS = bonus/ft_list_push_front.s
+
 AR = ar
 ARFLAGS = crs
 
 OBJS = $(SRCS:src/%.s=$(BIN)/%.o)
+OBJS_BONUS = $(SRCS_BONUS:bonus/%.s=$(BIN)/%.o)
+
+$(BIN)/%.o: bonus/%.s
+	@mkdir -p $(BIN)
+	@$(ASMC) $(ASMFLAGS) $< -o $@
 
 all: $(NAME)
 
@@ -22,7 +30,12 @@ $(BIN)/%.o: src/%.s
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-	@echo "project compiled"
+	@echo "libasm compiled ✅🚀"
+
+bonus: $(OBJS_BONUS)
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJS_BONUS)
+	@echo "libasm bonus compiled ✅🚀​​"
+	@echo "tu vas te régaler mon reuf"
 
 clean:
 	@rm -rf $(BIN)
@@ -35,10 +48,4 @@ re: fclean all
 TEST_DIR = tests
 TEST = $(TEST_DIR)/ft_tests
 
-test : test_build
-	@$(TEST)
-
-test_build : $(NAME) $(TEST)
-	@make -C $(TEST_DIR) clean
-
-.PHONY: clean fclean all re test test_build
+.PHONY: clean fclean all re bonus
